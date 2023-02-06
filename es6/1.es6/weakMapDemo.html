@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button id="null">null</button>
+
+  <a id="weak_null">weak null</a>
+
+  <script>
+    const buttonNode = document.querySelector("#null");
+    let key = {
+      name: "Kenan",
+      age: 20
+    }
+    let map = new Map();
+    map.set(key, new Array(50 * 1024 * 1024));
+    buttonNode.addEventListener("click", () => {
+      console.log(key)
+      key = null;
+      // 设置 key 为null ，点击垃圾回收后 js heap 下降
+    })
+    {
+      const buttonNode = document.querySelector("#weak_null");
+      let key = {
+        name: "Kenan",
+        age: 200
+      }
+      let map = new WeakMap();
+      map.set(key, new Array(50 * 1024 * 1024));
+      buttonNode.addEventListener("click", () => {
+        console.log(key)
+        key = null;
+        // 设置 key 为null ，点击垃圾回收后 js heap 下降
+      })
+    }
+  </script>
+
+  <script>
+    /**
+     * WeakMap特性
+     * WeakMap只能将对象作为键名(null除外)
+     * 键名引用对象是弱引用
+     * WeakMap不可遍历
+     * 
+     */
+    // 强引用:
+    {
+      let a = { name: "kenan", age: 20 }
+      let arr = [a, "other"]
+      // 当不需要时，需要手动切断引用，GC才能回收。
+      a = null;
+      arr[0] = null;
+      // 同理Map也是如此
+    }
+
+    // 弱引用：
+    // 弱引用不参与垃圾回收的机制，也就是说GC在回收时不考虑弱引用的影响
+    // 当一个对象被回收后，相关的弱引用也会自动消失
+    // 比如
+    {
+      let a = { name: "eric", age: 20 }
+      let wp = new WeakMap();
+      wp.set(a, new Array(10 * 1024 * 1024));
+      // 此时如果 a = null;
+      // wp里的键名对象和所对应的键值对会自动消失，不用手动删除引用
+    }
+
+  </script>
+
+</body>
+
+</html>
