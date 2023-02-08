@@ -133,6 +133,21 @@ class Promise {
       */
     return promise2;
   }
+
+  catch(errCallback) {
+    // 返回reject的promise
+    return this.then(null, errCallback);
+  }
+  static resolve(data){
+    return new Promise((resolve,reject)=>{
+        resolve(data);
+    })
+  }
+  static reject(reason){
+      return new Promise((resolve,reject)=>{
+          reject(reason);
+      })
+  }
 }
 
 /**
