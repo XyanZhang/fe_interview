@@ -6,8 +6,9 @@ let fs = require('fs');
 let p1 = new Promise((resolve, reject) => {
     resolve(100);
 })
+
 let p2 = p1.then((data) => {
     console.log(data)
     return 1000
 })
-console.log(p2)
+console.log('p2',p2);

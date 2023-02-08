@@ -61,19 +61,19 @@ class Promise {
                 })
             */
             if(this.status === RESOLVED) {
-                try {
+                setTimeout(() => {
+                    try {
                     // setTimeout 的作用，是为了能获取到 promise2 实例，与 onFulfilled 结果的值进行比对
                     // 如果不使用异步，无法获取promise2 实例
-                    setTimeout(() => {
                         // 执行onFulfilled回调，并获取返回值，根据类型处理返回值
                         let x = onFulfilled(this.value);
                         // x可能是一个proimise，普通值
                         // 此处 如果是同步执行，promise2 还并未初始化，获取不到值，需要异步包裹一下
                         resolvePromise(promise2, x, resolve, reject);
-                    }, 0)
-                } catch (e) {
-                    reject(e);
-                }
+                    } catch (e) {
+                        reject(e);
+                    }
+                }, 0)
             }
         });
         /* 
