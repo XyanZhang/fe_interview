@@ -1,4 +1,6 @@
 // 导出方法，不实现功能
-import reactive from './reactive'
+import { reactive } from './reactive'
 
-export default reactive
+export default {
+  reactive
+}

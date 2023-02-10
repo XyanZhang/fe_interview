@@ -1,11 +1,13 @@
-function reactive() {
+function reactiveFn() {
   alert('reactive');
 }
 
-var reactive$1 = {
-  reactive
-};
+let reactive = reactiveFn;
 
 // 导出方法，不实现功能
 
-export { reactive$1 as default };
+var index = {
+  reactive
+};
+
+export { index as default };

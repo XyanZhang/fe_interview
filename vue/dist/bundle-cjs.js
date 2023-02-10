@@ -1,13 +1,15 @@
 'use strict';
 
-function reactive() {
+function reactiveFn() {
   alert('reactive');
 }
 
-var reactive$1 = {
-  reactive
-};
+let reactive = reactiveFn;
 
 // 导出方法，不实现功能
 
-module.exports = reactive$1;
+var index = {
+  reactive
+};
+
+module.exports = index;

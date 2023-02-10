@@ -4,16 +4,18 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.VueGlobal = factory());
 })(this, (function () { 'use strict';
 
-  function reactive() {
+  function reactiveFn() {
     alert('reactive');
   }
 
-  var reactive$1 = {
-    reactive
-  };
+  let reactive = reactiveFn;
 
   // 导出方法，不实现功能
 
-  return reactive$1;
+  var index = {
+    reactive
+  };
+
+  return index;
 
 }));

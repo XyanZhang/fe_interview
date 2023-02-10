@@ -1,8 +1,6 @@
 
-function reactive() {
+function reactiveFn() {
   alert('reactive')
 }
 
-export default {
-  reactive
-}
+export let reactive = reactiveFn
