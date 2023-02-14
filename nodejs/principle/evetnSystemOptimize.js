@@ -32,7 +32,9 @@ class EventSystem {
   }
   // 生产任务
   enQueue(func) {
+      // 任务入队
       this.queue.push(func);
+      // 如果有任务，则"唤醒" await
       this.wakeup && this.wakeup();
   }
 
