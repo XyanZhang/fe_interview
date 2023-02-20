@@ -13,6 +13,10 @@ console.log(calculate, calculate(10)); // 200
 let calculate2 = composeFromLToR(multiply, add); // 先乘后加
 console.log(calculate2, calculate2(10)); // 110 
 
+let divided2 = (z) => z/1.5
+let calculate3 = compose(divided2, multiply, add); // 先加后乘
+console.log(calculate3, calculate3(10)); // 200
+
 function compose(...fns) {
   return function (x) {
     return fns.reduceRight((y, fn) => fn(y), x);
