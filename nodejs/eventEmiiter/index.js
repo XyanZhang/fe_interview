@@ -12,8 +12,8 @@
   emit(event,[arg1],[arg2],[...])	手工触发指定事件
 */
 
-// let EventEmitter = require('events'); 
-let EventEmitter = require('./events');
+let EventEmitter = require('events'); 
+// let EventEmitter = require('./events');
 let util = require('util');
 util.inherits(Bell,EventEmitter);
 function Bell(){
