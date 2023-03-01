@@ -22,7 +22,7 @@ function strHandle (line) {
   }
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
-      sum = sum + fn(arr[i]) * 16 ** (arr.length - i - 1);
+      sum = sum + fn(arr[i]) * 16 ** (arr.length - i - 1); // 运算： ** 幂运算
   }
   return sum;
 }
