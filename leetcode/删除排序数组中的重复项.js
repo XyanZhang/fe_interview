@@ -13,7 +13,19 @@ var removeDuplicates = function(nums) {
           i--;
       }
   }
-  return nums
+  return nums.length
 };
 
-console.log('removeDuplicates([1,1,2])',removeDuplicates([1,1,1,1,12]));
+// 方法二：双指针，快慢指针，不用删除元素，只需要获取不重复的元素个数
+var removeDuplicates = function(nums) {
+  let i = 0;
+  for(let j=1; j<nums.length; j++) {
+      if(nums[i] != nums[j]) {
+          i++;
+          nums[i] = nums[j]
+      }
+  }
+  return i+1
+};
+
+console.log('removeDuplicates([1,1,2])',removeDuplicates([0,0,1,1,1,2,2,3,3,4]));
