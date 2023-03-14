@@ -33,7 +33,8 @@ const exp2 = () => {
   console.log();
   const hello = new Hello();
   console.log(hello.sayHello());
-  console.log();
+  console.log(hello.hello);
+  console.log(hello.newProperty);
   console.log('-----------------------示例2:执行完毕-----------------------');
 };
 
