@@ -1,0 +1,43 @@
+import { Table } from 'antd';
+
+const dataSource = [
+  { key: '1', name: 'John', age: 32, address: 'New York' },
+  { key: '2', name: 'Mike', age: 28, address: 'New York' },
+  { key: '3', name: 'David', age: 32, address: 'London' },
+  { key: '4', name: 'Steven', age: 25, address: 'Paris' },
+  { key: '5', name: 'Mary', age: 28, address: 'Paris' },
+];
+
+// 对数据进行处理，合并相邻两行中值相同的单元格
+const mergedData = dataSource.reduce((acc, cur, index) => {
+  const prev = dataSource[index - 1];
+  if (prev && prev.address === cur.address) {
+    acc[acc.length - 1].span += 1;
+    cur.isMerged = true;
+  } else {
+    cur.isMerged = false;
+    acc.push({ ...cur, span: 1 });
+  }
+  return acc;
+}, []);
+
+const columns = [
+  { title: 'Name', dataIndex: 'name', key: 'name', render: (text, record) => {
+    return record.isMerged ? null : text;
+  }},
+  { title: 'Age', dataIndex: 'age', key: 'age', render: (text, record) => {
+    return record.isMerged ? null : text;
+  }},
+  { title: 'Address', dataIndex: 'address', key: 'address', render: (text, record) => {
+    return {
+      children: record.isMerged ? null : text,
+      props: {
+        rowSpan: record.span,
+      },
+    };
+  }},
+];
+
+const MyTable = () => {
+  return <Table dataSource={mergedData} columns={columns} />;
+};
