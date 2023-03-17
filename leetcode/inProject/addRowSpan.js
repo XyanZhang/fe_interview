@@ -20,7 +20,28 @@ const mergeRows = (rows, key) => {
     },
     [rows[0]]
   );
-}; 
+};
+
+const mergeRows2 = (data, key) => {
+  let data2 = data;
+  let i = 0;
+  let len = data2.length;
+  while (i < len) {
+    let count = 1;
+    let j = i + 1;
+    while (j < len) {
+      if (data2[i][key] === data2[j][key]) {
+        count++;
+      } else {
+        break;
+      }
+      j++;
+    }
+    data2[i].rowSpan = count;
+    i = j;
+  }
+  return data2;
+}
 
 let data = [
 {val: "a"},
@@ -33,9 +54,28 @@ let data = [
 {val: "c"},
 ]
 { 
-  let data2 = data;
-  mergeRows(data2, 'val');
-  // 
+  mergeRows(data, 'val');
+  console.log(data)
+}
+let data2 = [
+  {val: "a"},
+  {val: "a"},
+  {val: "b"},
+  {val: "b"},
+  {val: "a"},
+  {val: "d"},
+  {val: "d"},
+  {val: "d"},
+  {val: "c"},
+  {val: "c"},
+  {val: "c"},
+  {val: "d"},
+  {val: "d"},
+  {val: "d"},
+  {val: "c"},
+  ]
+{ 
+  mergeRows2(data2, 'val');
   console.log(data2)
 }
 
