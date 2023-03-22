@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #my-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 300px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  .resizer {
+    width: 40px;
+    height: 40px;
+    background-color: grey;
+  }
+</style>
+<body>
+  <div id="my-dialog">
+    <!-- <div style="width: 50px;height: 50px;background-color: #333;"></div> -->
+    <!-- 这里放弹框的内容 -->
+  </div>
+</body>
+<script>
+  let isResizable = true;
+  let resizeStartX, resizeStartY;
+  const dialog = document.getElementById('my-dialog');
+  const resizer = document.createElement('div');
+  resizer.className = 'resizer';
+  dialog.appendChild(resizer);
+
+  resizer.addEventListener('mousedown', (event) => {
+    isResizable = true;
+    resizeStartX = event.clientX;
+    resizeStartY = event.clientY;
+  });
+
+  document.addEventListener('mousemove', (event) => {
+    if (isResizable) {
+      const width = event.clientX - resizeStartX + dialog.offsetWidth;
+      const height = event.clientY - resizeStartY + dialog.offsetHeight;
+      dialog.style.width = width + 'px';
+      dialog.style.height = height + 'px';
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    isResizable = false;
+    resizeStartX = 0;
+    resizeStartY = 0;
+  });
+</script>
