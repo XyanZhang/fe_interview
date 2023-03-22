@@ -3,82 +3,83 @@
     background-color: black;
     position: relative;
   }
+
   .modal {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-  max-width: 800px;
-  width: 400px;
-  height: 300px;
-  overflow: auto;
-  z-index: 1000;
-  /* opacity: 0; */
-  transition: opacity 0.2s ease;
-}
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 400px;
+    height: 300px;
+    overflow: auto;
+    z-index: 1000;
+    /* opacity: 0; */
+    transition: opacity 0.2s ease;
+  }
 
-.modal.show {
-  opacity: 1;
-}
+  .modal.show {
+    opacity: 1;
+  }
 
-.modal-header {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #eee;
-}
+  .modal-header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eee;
+  }
 
-.modal-header h3 {
-  margin: 0;
-}
+  .modal-header h3 {
+    margin: 0;
+  }
 
-.modal-close-btn {
-  display: block;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  color: black;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
+  .modal-close-btn {
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
 
-.modal-close-btn:hover {
-  color: red;
-}
+  .modal-close-btn:hover {
+    color: red;
+  }
 
-.modal-body {
-  padding: 10px;
-  flex-grow: 1;
-}
+  .modal-body {
+    padding: 10px;
+    flex-grow: 1;
+  }
 
-.modal-footer {
-  padding: 10px;
-  display: flex;
-  justify-content: flex-end;
-  background-color: #eee;
-}
+  .modal-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #eee;
+  }
 
-.modal-footer button {
-  margin-left: 10px;
-}
+  .modal-footer button {
+    margin-left: 10px;
+  }
 
-.modal-resize-handle {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 12px;
-  height: 12px;
-  cursor: se-resize;
-  background-color: #999;
-}
+  .modal-resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    cursor: se-resize;
+    background-color: #999;
+  }
 </style>
 <div class="modal">
   <div class="modal-header">
@@ -98,31 +99,54 @@
   (function () {
     const modal = document.querySelector('.modal');
     const resizeHandle = modal.querySelector('.modal-resize-handle');
-    let isResizing = false;
-    let lastX = 0;
-    let lastY = 0;
-    let lastWidth = 0;
-    let lastHeight = 0;
+    resize(resizeHandle, modal)
+    drag(document.querySelector('.modal-header'), modal);
+    function resize(resizeHandle, modal) {
+      let isResizing = false;
+      let lastX = 0;
+      let lastY = 0;
+      let lastWidth = 0;
+      let lastHeight = 0;
 
-    resizeHandle.addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      isResizing = true;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      lastWidth = parseInt(getComputedStyle(modal).width);
-      lastHeight = parseInt(getComputedStyle(modal).height);
-    });
+      resizeHandle.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        isResizing = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        lastWidth = parseInt(getComputedStyle(modal).width);
+        lastHeight = parseInt(getComputedStyle(modal).height);
+      });
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isResizing) return;
-      const diffX = e.clientX - lastX;
-      const diffY = e.clientY - lastY;
-      modal.style.width = lastWidth + diffX + 'px';
-      modal.style.height = lastHeight + diffY + 'px';
-    });
+      document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const diffX = e.clientX - lastX;
+        const diffY = e.clientY - lastY;
+        modal.style.width = lastWidth + diffX + 'px';
+        modal.style.height = lastHeight + diffY + 'px';
+      });
 
-    document.addEventListener('mouseup', () => {
-      isResizing = false;
-    });
+      document.addEventListener('mouseup', () => {
+        isResizing = false;
+      });
+
+    }
+    function drag(el, dialog) {
+      let isDraggable = false;
+      let dragStartX, dragStartY;
+      el.addEventListener('mousedown', (event) => {
+        isDraggable = true;
+        dragStartX = event.clientX - dialog.offsetLeft;
+        dragStartY = event.clientY - dialog.offsetTop;
+      });
+      document.addEventListener('mousemove', (event) => {
+        if (isDraggable) {
+          dialog.style.left = event.clientX - dragStartX + 'px';
+          dialog.style.top = event.clientY - dragStartY + 'px';
+        }
+      });
+      document.addEventListener('mouseup', () => {
+        isDraggable = false;
+      });
+    }
   })();
 </script>
