@@ -11,6 +11,9 @@ var person = {
     return this.name;
   },
 };
+
+var person1 = createObj(person);
+console.log(person1.getName()); // person
 // 缺点
 // 1. 引用类型的属性被所有实例共享
 // 2. 在创建 Child 的实例时，不能向 Parent 传参
