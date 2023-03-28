@@ -59,7 +59,7 @@ export const exp1 = () => {
   console.log();
   console.log('-----------------------示例1:执行完毕-----------------------');
 };
-
+exp1()
 // 控制台输出
 // login success
 // 停顿100ms
