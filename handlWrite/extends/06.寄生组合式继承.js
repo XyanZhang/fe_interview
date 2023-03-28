@@ -20,6 +20,14 @@ Child.prototype = new F();
 var child1 = new Child('child', 18);
 console.log(child1.getName()); // child
 
+// 封装一下
+function selfExtend(Child, Parent) {
+  function F() {}
+  F.prototype = Parent.prototype;
+  Child.prototype = new F();
+  Child.prototype.constructor = Child;
+}
+
 // 缺点
 // 1. 无法实现函数复用，每个子类都有父类实例函数的副本，影响性能
 // 2. 无法继承原型上的属性和方法，只能继承实例属性/方法
