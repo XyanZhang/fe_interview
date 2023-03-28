@@ -17,3 +17,7 @@ Child.prototype = new Parent();
 
 var child1 = new Child();
 console.log(child1.getName()); // parent
+
+// 缺点
+// 1. 调用了两次父类构造函数，生成了两份实例
+// 2. 子类的原型上多了不需要的父类属性
