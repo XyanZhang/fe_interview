@@ -1,8 +1,10 @@
-import React, { useRef,useState } from 'react';
+import React, { useContext, useRef,useState } from 'react';
+import { myContext } from '../../App';
 import Counter from '../count/index';
 
 
 function RefComp(props, ref) {
+  let myCtx = useContext(myContext);
   const [inputValue, setInputValue] = useState('初始值'); //
   const inputRef = useRef(); // 获取dom元素
   return (
@@ -14,6 +16,9 @@ function RefComp(props, ref) {
         {/* ref: 获取对真实dom的引用，不能作用与components */}
         ref输入框：<input ref={ref} type="text" value={inputValue}/>
         <button onClick={() => setInputValue('更新后的值')}>更新</button>
+      </p>
+      <p>
+        context: {myCtx && myCtx.name}
       </p>
     </div>
   );
