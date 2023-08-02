@@ -4,6 +4,7 @@ export default function Timer(props) {
   const [time, setTime] = useState(0);
 
   const timer = useRef(null); // ref 值变化不会引起组件重新渲染
+  const inputRef = useRef(); // 获取dom元素
 
   // 开启计时器
   const handleStart = useCallback(() => {
@@ -17,6 +18,9 @@ export default function Timer(props) {
     window.clearInterval(timer.current);
     timer.current = null;
   }, []);
+  const handleFocus = useCallback(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <div>
@@ -24,6 +28,12 @@ export default function Timer(props) {
       <p>time: { time / 10 } seconds</p>
       <button onClick={handleStart}>Start</button>
       <button onClick={handlePause}>Pause</button>
+      <p>
+        {/* ref: 获取对真实dom的引用，不能作用与components */}
+        <input ref={inputRef} type="text" />
+        <button onClick={handleFocus}>Focus</button>
+      </p>
+    
     </div>
   )
 }
