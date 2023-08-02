@@ -16,6 +16,14 @@ export default function Counter(props) {
   const callbackCount = useCallback(() => {
     setCount(count - 1)
   }, [count]);
+
+  // 使用useMemo 模拟 useCallback
+  const memoCallbackCount = useMemo(() => {
+    return () => {
+      setCount(count - 1)
+    }
+  }, [count]);
+
   return (
     <div>
       <h1>Counter</h1>
@@ -23,6 +31,7 @@ export default function Counter(props) {
       <p>memo: {memoCount}</p>
       <button onClick={handleCount}>+</button>
       <button onClick={callbackCount}>-</button>
+      <button onClick={memoCallbackCount}>-</button>
     </div>
   )
 
