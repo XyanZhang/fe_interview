@@ -6,6 +6,7 @@ export default function Timer(props) {
   const timer = useRef(null); // ref 值变化不会引起组件重新渲染
   const inputRef = useRef(); // 获取dom元素
   const forwardRef = useRef(); // 获取组件实例
+  const [refText, setRefText] = useState('refText'); // refText 变化会引起组件重新渲染
 
   // 开启计时器
   const handleStart = useCallback(() => {
@@ -25,6 +26,7 @@ export default function Timer(props) {
 
   const seeRef = useCallback(() => {
     console.log(forwardRef.current);
+    setRefText(forwardRef.current.value);
   }, []);
 
   return (
@@ -42,7 +44,10 @@ export default function Timer(props) {
       <RefComp ref={forwardRef}></RefComp>
       <p>
         通过 forwardRef 获取的ref值：{forwardRef.current && forwardRef.current.value}
+      </p>
+      <p style={{display: 'flex',alignItems: 'center'}}>
         <button onClick={seeRef}>查看ref实例</button>
+        <textarea rows="2" value={refText}></textarea>
       </p>
       <hr></hr>
     </div>
