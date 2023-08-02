@@ -26,7 +26,7 @@ export default function Counter(props) {
 
   return (
     <div>
-      <h1>Counter</h1>
+      <h1>{props.title || "Counter"}</h1>
       <p>state: {count}</p>
       <p>memo: {memoCount}</p>
       <button onClick={handleCount}>+</button>
