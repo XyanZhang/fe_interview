@@ -1,7 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 export default function Counter(props) {
   const [count, setCount] = useState(0);
+
+  // 每次count变化都会重新渲染，每次都会重新创建memoCount
+  const memoCount = useMemo(() => {
+    return count * 2
+  }, [count]);
 
   // 每次点击都会重新渲染，每次都会重新创建handleCount
   const handleCount = () => {
@@ -14,7 +19,8 @@ export default function Counter(props) {
   return (
     <div>
       <h1>Counter</h1>
-      <p>{count}</p>
+      <p>state: {count}</p>
+      <p>memo: {memoCount}</p>
       <button onClick={handleCount}>+</button>
       <button onClick={callbackCount}>-</button>
     </div>
