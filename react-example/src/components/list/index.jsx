@@ -1,7 +1,6 @@
 import { useCallback } from "react";
-import useAsync from "../../hooks/useAsync";
 import { getTodosData } from "../../api";
-
+import { useAsync } from "../../hooks";
 
 function List(props) {
   const {
