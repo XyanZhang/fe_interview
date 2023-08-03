@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import Counter from './components/count';
+import List from './components/list';
 import Timer from './components/timer';
 import WindowSize from './components/windowSize';
 
@@ -22,6 +23,8 @@ function App() {
         <button style={{color:'red'}} onClick={changeContextValue}>修改context</button>
         <Timer></Timer>
       </myContext.Provider>
+      <List></List>
+
       {/* 屏幕变化 */}
       <WindowSize></WindowSize>
     </div>
