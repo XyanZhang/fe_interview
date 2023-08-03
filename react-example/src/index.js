@@ -6,9 +6,11 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // https://juejin.cn/post/7009189602506309640
+  // https://react.dev/blog/2022/03/29/react-v18#new-strict-mode-behaviors
+  // <React.StrictMode> dev模式下会多次渲染，生产环境下不会
     <App />
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
