@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import Counter from './components/count';
 import List from './components/list';
+import ScrollTop from './components/scrollTop';
 import Timer from './components/timer';
 import WindowSize from './components/windowSize';
-import { useScroll } from './hooks';
 
 // 为什么不直接定义全局的数据，而是使用context？
 // 因为全局的修改不会自动更新组件，而context会渲染使用到的组件
@@ -16,8 +16,6 @@ function App() {
     setCount(count + 1);
   }, [count]);
 
-  const { x, y } = useScroll(); // 监听滚动
-
   return (
     <div className="App">
       {/* 计数 */}
@@ -29,9 +27,8 @@ function App() {
       </myContext.Provider>
       <List></List>
       <hr></hr>
-      <div style={{position: 'fixed',top: 0, right: 0,width: '180px',height: '40px',background: 'lightgrey'}}>
-        滚动位置：x: {x}, y: {y}
-      </div>
+
+      <ScrollTop></ScrollTop>
       <hr></hr>
       {/* 屏幕变化 */}
       <WindowSize></WindowSize>
