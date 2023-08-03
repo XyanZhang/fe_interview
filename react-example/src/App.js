@@ -19,7 +19,7 @@ function App() {
       <Counter></Counter>
       {/* 计时器 */}
       <myContext.Provider value={{name: count}}>
-        <button onClick={changeContextValue}>修改context</button>
+        <button style={{color:'red'}} onClick={changeContextValue}>修改context</button>
         <Timer></Timer>
       </myContext.Provider>
       {/* 屏幕变化 */}

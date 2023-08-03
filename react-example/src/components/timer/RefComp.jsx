@@ -17,7 +17,7 @@ function RefComp(props, ref) {
         ref输入框：<input ref={ref} type="text" value={inputValue}/>
         <button onClick={() => setInputValue('更新后的值')}>更新</button>
       </p>
-      <p>
+      <p style={{color: 'red'}}>
         context: {myCtx && myCtx.name}
       </p>
     </div>
