@@ -7,7 +7,7 @@ const getPosition = () => {
   };
 };
 
-const useScroll = () => {
+export const useScroll = () => {
   const [ position, setPosition ] = useState(getPosition());
   useEffect(() => {
     const handleScroll = () => {
@@ -20,5 +20,3 @@ const useScroll = () => {
   }, []);
   return position;
 }
-
-export default useScroll;

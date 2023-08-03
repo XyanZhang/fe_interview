@@ -3,7 +3,7 @@ import Counter from './components/count';
 import List from './components/list';
 import Timer from './components/timer';
 import WindowSize from './components/windowSize';
-import useScroll from './hooks/useScroll';
+import { useScroll } from './hooks';
 
 // 为什么不直接定义全局的数据，而是使用context？
 // 因为全局的修改不会自动更新组件，而context会渲染使用到的组件
