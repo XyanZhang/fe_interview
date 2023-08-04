@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 const { useAsync } = require("../../hooks");
 
 let getPosts = async (page=1, size=10) => {
