@@ -26,9 +26,11 @@ let useArticles = (page,size) => {
 }
 
 let useComments = (postId) => {
-  const { execute, loading, value, error } = useAsync(async () => {
-    return await getComments(postId);
-  }, true);
+  const { loading, value, error } = useAsync((
+    useCallback(async () => {
+      return await getComments(postId);
+    }, [postId])
+  ));
 
   return {
     commentsLoading: loading,
@@ -41,7 +43,8 @@ function PostComment(props) {
   const [page, setPage] = useState(1); //
   const [size, setSize] = useState(2);
   const { articles, articlesLoading, articlesError } = useArticles(page, size);
-  // const { comments, commentsLoading, commentsError } = useComments(articles);
+  const [currentPostId, setCurrentPostId] = useState(articles && articles[0] && articles[0].id); // 当前文章id
+  const { comments, commentsLoading, commentsError } = useComments(currentPostId);
 
   let flushList = useCallback((type) => {
     if(type === 'page') {
@@ -50,6 +53,10 @@ function PostComment(props) {
       setSize(size + 1);
     }
   }, [page, size]);
+
+  const selectArticle = useCallback((postId) => {
+    setCurrentPostId(postId);
+  }, []);
 
   return (
     <>
@@ -61,9 +68,23 @@ function PostComment(props) {
             articles && articles.map(item => {
               return (
                 <div key={item.id}>
-                  <h1>{item.title}</h1>
+                  <h1 onClick={selectArticle.bind(this, item.id)} >{item.title}</h1>
                   <p>{item.body}</p>
-                  {/* <Comments postId={item.id}></Comments> */}
+                </div>
+              )
+            })
+          )
+        )
+      }
+      <hr></hr>
+      {
+        commentsLoading ? <div>loading...</div> : (
+          commentsError ? <div>error</div> : (
+            comments && comments.map(item => {
+              return (
+                <div key={item.id}>
+                  <h1>{item.name}</h1>
+                  <p>{item.body}</p>
                 </div>
               )
             })
