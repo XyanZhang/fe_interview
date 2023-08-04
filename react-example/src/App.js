@@ -8,6 +8,7 @@ import WindowSize from './components/windowSize';
 import BlogList from './components/blogList';
 import ReduxUse from './components/reduxUse';
 import CounterRenderPropsExample from './components/renderProps';
+import FormExample from './components/form';
 
 // 为什么不直接定义全局的数据，而是使用context？
 // 因为全局的修改不会自动更新组件，而context会渲染使用到的组件
@@ -42,6 +43,7 @@ function App() {
       <div className='w-50p'>
         <BlogList></BlogList>
         <ReduxUse></ReduxUse>
+        <FormExample></FormExample>
       </div>
 
 
