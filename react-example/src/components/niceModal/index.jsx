@@ -14,9 +14,10 @@ const MyModal = createNiceModal("my_modal", () => {
 
 export default function NiceModalExample() {
   const modal = useNiceModal("my_modal");
+  console.log(123)
   return (
     <>
-      <button onClick={() => modal.show(true)}>
+      <button onClick={() => modal.show()}>
         show modal
       </button>
       <button onClick={() => modal.hide(true)}>

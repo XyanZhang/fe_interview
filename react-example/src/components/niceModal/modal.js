@@ -1,19 +1,12 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { HIDE_MODAL, SHOW_MODAL } from './reducer';
 
 function showModal(modalId, args) {
-  console.log(modalId)
-  console.log('showModal', modalId, args);
-  return {
-    type: 'SHOW_MODAL',
-    payload: { modalId, args }
-  }
+  return SHOW_MODAL({ modalId, args })
 }
 function hideModal(modalId, force) {
-  return {
-    type: 'HIDE_MODAL',
-    payload: { modalId, force }
-  }
+  return HIDE_MODAL({ modalId, force })
 }
 
 export const useNiceModal = (modalId) => {
@@ -31,7 +24,7 @@ export const createNiceModal = (modalId, ModalComponent) => {
     const { visible, args } = useNiceModal(modalId);
     console.log( visible, args )
     if(!visible) return null;
-    return <ModalComponent {...props} {...args} />
+    return <ModalComponent {...args} {...props} />
   }
 }
 

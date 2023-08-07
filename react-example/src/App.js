@@ -21,7 +21,7 @@ function App() {
   const changeContextValue = useCallback(() => {
     setCount(count + 1);
   }, [count]);
-
+  console.log(1111)
   return (
     <div className="App" style={{display: 'flex',}}>
       <div className='w-50p'>
