@@ -28,3 +28,31 @@ const useHash = () => {
   }, [])
   return [hash, setHash];
 }
+
+// history模式
+export const HistoryRouter = ({children}) => {
+  let routes = {};
+  children.forEach(child => {
+    const { path, component } = child.props
+    path && (routes[path] = { component })
+  });
+  console.log(routes)
+  let [ path ] = usePath();
+  console.log(path)
+  path = path || '/';
+  if(!routes[path]) {
+    return 'not found';
+  } 
+  const Page = routes[path].component;
+  return Page ? <Page /> : 'not found';
+}
+
+const usePath = () => {
+  const [path, setPath] = useState(window.location.pathname);
+  useEffect(() => {
+    window.addEventListener('popstate', () => {
+      setPath(window.location.pathname);
+    })
+  }, [])
+  return [path, setPath];
+}

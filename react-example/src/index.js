@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'; // react-redux提供Provider组件，可以让容器组件拿到state
 import { store } from './store/index'
-import { MyRouter, Route } from './utils/router';
+import { MyRouter, HistoryRouter,  Route } from './utils/router';
 import RouteDemo from './pages/routerDemo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,12 +19,20 @@ root.render(
         <a href="/">首页</a>
         &emsp;
         <a href="#/2">demo 页面</a>
+        &emsp;
+        <a href="/3">首页 history</a>
+        &emsp;
+        <a href="/4">demo 页面 history</a>
       </li>
     </ul>
-     <MyRouter>
+     {/* <MyRouter>
       <Route path='/' component={App}/>
       <Route path='/2' component={RouteDemo}/>
-    </MyRouter>
+    </MyRouter> */}
+    <HistoryRouter>
+      <Route path='/3' component={App}/>
+      <Route path='/4' component={RouteDemo}/>
+    </HistoryRouter>
   </Provider>
   // </React.StrictMode>
 );
