@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HIDE_MODAL, SHOW_MODAL } from './reducer';
+import { HIDE_MODAL, modalSlice, SHOW_MODAL } from './reducer';
 
 function showModal(modalId, args) {
   return SHOW_MODAL({ modalId, args })
@@ -13,9 +13,9 @@ export const useNiceModal = (modalId) => {
   const dispatch = useDispatch();
   const show = useCallback((args) => dispatch(showModal(modalId, args)), [dispatch, modalId]);
   const hide = useCallback((force) => dispatch(hideModal(modalId, force)), [dispatch, modalId]);
-  const args = useSelector(state => state[modalId]);
-  const hiding = useSelector(state => state.hiding && state.hiding[modalId]);
-  return { args, hiding, visible:!!args, show, hide };
+  const args = useSelector(state => state[modalSlice.name][modalId]);
+  const hiding = useSelector(state => state[modalSlice.name].hiding && state[modalSlice.name].hiding[modalId]);
+  return { modalId, args, hiding, visible:!!args, show, hide };
 }
 
 // renderProps, 组件作为参数传入，返回一个新的组件
