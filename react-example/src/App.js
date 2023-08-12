@@ -9,6 +9,7 @@ import BlogList from './components/blogList';
 import ReduxUse from './components/reduxUse';
 import CounterRenderPropsExample from './components/renderProps';
 import FormExample from './components/form';
+import NiceModalExample from './components/niceModal';
 
 // 为什么不直接定义全局的数据，而是使用context？
 // 因为全局的修改不会自动更新组件，而context会渲染使用到的组件
@@ -20,10 +21,11 @@ function App() {
   const changeContextValue = useCallback(() => {
     setCount(count + 1);
   }, [count]);
-
+  console.log(1111)
   return (
     <div className="App" style={{display: 'flex',}}>
       <div className='w-50p'>
+        <NiceModalExample></NiceModalExample>
         {/* 计数 */}
         <Counter></Counter>
         {/* renderProps 计数 */}
