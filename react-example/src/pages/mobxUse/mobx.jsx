@@ -1,11 +1,20 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-
-
 let TodoListOrigin = ({store}) => {
   const onNewTodo = () => {
     store.addTodo(prompt('输入新的待办：','请来杯咖啡'));
+  }
+
+  // 异步加载待办
+  const asyncLoad = () => {
+    store.pendingRequests++;
+    setTimeout(() => {
+      store.addTodo(
+        prompt('输入新的待办：','请来杯咖啡')
+      );
+      store.pendingRequests--;
+    }, 2000);
   }
 
   return (
@@ -19,6 +28,7 @@ let TodoListOrigin = ({store}) => {
       { store.pendingRequests > 0 ? <marquee>正在加载……</marquee> : null }
       <button onClick={ onNewTodo }>新待办</button>
       <small>（双击待办进行编辑）</small>
+      <button onClick={ asyncLoad }>加载待办</button>
       {/* <RenderCounter /> */}
     </div>
   ); 

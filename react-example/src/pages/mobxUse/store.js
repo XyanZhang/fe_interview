@@ -7,7 +7,7 @@ class ObservableTodoStore {
     makeObservable(this, {
       todos: observable,
       pendingRequests: observable,
-      completedTodosCount: computed,
+      completedTodosCount: computed, // 调用该属性get时，会自动调用该方法
       report: computed,
       addTodo: action,
     });
