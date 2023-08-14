@@ -1,5 +1,5 @@
 import React from "react";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react"; // or "mobx-react-lite"
 
 let TodoListOrigin = ({store}) => {
   const onNewTodo = () => {
