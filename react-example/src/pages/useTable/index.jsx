@@ -1,6 +1,5 @@
 import React from 'react';
-import './styles.module.less';
-// import './styles.css';
+import './styles.css';
 import TrackViewer from './TrackViewer';
 import config from './config';
 import data from './data';
