@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import './index2.less'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'; // react-redux提供Provider组件，可以让容器组件拿到state
