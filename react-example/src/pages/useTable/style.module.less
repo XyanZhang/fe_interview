@@ -1,0 +1,77 @@
+.table {
+    user-select: none;
+
+    .header {
+        position: relative;
+        padding: 0 10px;
+        height: 32px;
+        line-height: 32px;
+
+        .title {
+            position: relative;
+        }
+
+        .resize {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: -5px;
+            bottom: 0;
+            width: 11px;
+            cursor: col-resize;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 5px;
+                bottom: 0;
+                width: 1px;
+                background-color: #333;
+            }
+        }
+
+        .sortIcn {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 10px;
+            bottom: 0;
+            width: 10px;
+            line-height: 32px;
+        }
+
+        &.sortable:hover {
+            background-color: #1577BA80;
+
+            .sortIcn {
+                display: block;
+            }
+        }
+
+        &.sorting {
+            .sortIcn {
+                display: block;
+            }
+        }
+    }
+
+    .row {
+        &.dark {
+            background-color: #eee;
+        }
+
+        &.selected {
+            background-color: rgb(158, 191, 214);
+        }
+
+        &:hover {
+            background-color: rgb(87, 188, 255);
+        }
+    }
+
+    .cell {
+        padding: 5px 10px;
+
+    }
+}

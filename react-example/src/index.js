@@ -8,6 +8,7 @@ import { store } from './store/index'
 import { MyRouter, HistoryRouter,  Route } from './utils/router';
 import RouteDemo from './pages/routerDemo';
 import MobxUse from './pages/mobxUse';
+import TableUse from './pages/useTable';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +27,8 @@ root.render(
         <a href="/4">demo 页面 history</a>
         &emsp;
         <a href="/5">mobx use</a>
+        &emsp;
+        <a href="/6">table use</a>
       </li>
     </ul>
      {/* <MyRouter>
@@ -36,6 +39,7 @@ root.render(
       <Route path='/3' component={App}/>
       <Route path='/4' component={RouteDemo}/>
       <Route path='/5' component={MobxUse}/>
+      <Route path='/6' component={TableUse}/>
     </HistoryRouter>
   </Provider>
   // </React.StrictMode>
