@@ -18,3 +18,16 @@ function binarySearch(arr, target) {
   }
   return -1;
 }
+
+// 双指针
+var search = function(nums, target) {
+  let i = 0, j = nums.length - 1;
+  while(i <= j) {
+      if (nums[i] === target) return i;
+      if (nums[j] === target) return j;
+      i++;
+      j--;
+  }
+
+  return -1;
+};
