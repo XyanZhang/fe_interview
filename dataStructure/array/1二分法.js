@@ -19,6 +19,23 @@ function binarySearch(arr, target) {
   return -1;
 }
 
+// 二分法2
+var search = function(nums, target) {
+  let start = 0;
+  let end = nums.length;
+  while(start < end) {
+      let mid = start + Math.floor((end - start)/2);
+      if(target > nums[mid]) {
+          start = mid + 1;
+      }else if(target < nums[mid]) {
+          end = mid;
+      }else {
+          return mid
+      }
+  }
+  return -1;
+};
+
 // 双指针
 var search = function(nums, target) {
   let i = 0, j = nums.length - 1;
