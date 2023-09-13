@@ -1,3 +1,4 @@
+// 滑动窗口思路
 var minSubArrayLen = function(target, nums) {
   let sum = 0;
   let i = 0;
@@ -9,9 +10,10 @@ var minSubArrayLen = function(target, nums) {
       while(sum >= target) {
           let subL = j - i + 1;
           result = Math.min(result, subL)
-          sum = sum - nums[i];
+          sum = sum - nums[i]; // 缩小范围时 移除i处的值再进行比较
           i++;
       }
+      // sum < target 时，跳出当前i 到 j 小范围的最小值
   }
   return result == Infinity ? 0 : result
 };
