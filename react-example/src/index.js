@@ -9,6 +9,7 @@ import { MyRouter, HistoryRouter,  Route } from './utils/router';
 import RouteDemo from './pages/routerDemo';
 import MobxUse from './pages/mobxUse';
 import TableUse from './pages/useTable';
+import Ahooks from './pages/ahooksUse';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +30,8 @@ root.render(
         <a href="/5">mobx use</a>
         &emsp;
         <a href="/6">table use</a>
+        &emsp;
+        <a href="/7">ahooks use</a>
       </li>
     </ul>
      {/* <MyRouter>
@@ -40,6 +43,7 @@ root.render(
       <Route path='/4' component={RouteDemo}/>
       <Route path='/5' component={MobxUse}/>
       <Route path='/6' component={TableUse}/>
+      <Route path='/7' component={Ahooks}/>
     </HistoryRouter>
   </Provider>
   // </React.StrictMode>
