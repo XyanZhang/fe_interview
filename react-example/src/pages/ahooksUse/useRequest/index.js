@@ -2,13 +2,18 @@ import React, { useEffect } from 'react';
 
 export default function useFetch(service, otpions) {
 
+  const serviceRef = useLatest(service); // 使用ref 进行绑定
+
+  const update = useUpdate();
+  
   let run = () => {}
 
   useMount(() => {
 
   })
 
-  const update = useUpdate();
+
+  useUnmount(() => { console.log('组件卸载') })
 
   return {
     loading: '',
@@ -23,6 +28,7 @@ const useMount = (callback) => {
     callback()
   }, [])
 }
+
 
 // 组件卸载时 执行fn
 const useUnmount = (fn) => {
@@ -57,3 +63,18 @@ const useUpdate = () => {
 
   return useCallback(() => setState({}), []);
 };
+
+// useCreation的作用是在组件渲染期间缓存一个固定的值, 避免重复计算
+export default function useCreation(factory, deps) {
+  const { current } = useRef({
+    deps,
+    obj: undefined,
+    initialized: false,
+  });
+  if (current.initialized === false || !depsAreSame(current.deps, deps)) {
+    current.deps = deps;
+    current.obj = factory();
+    current.initialized = true;
+  }
+  return current.obj;
+}
