@@ -24,7 +24,7 @@ const useMount = (callback) => {
   }, [])
 }
 
-// 挂载取消
+// 组件卸载时 执行fn
 const useUnmount = (fn) => {
   if (isDev) {
     if (!isFunction(fn)) {
@@ -32,10 +32,14 @@ const useUnmount = (fn) => {
     }
   }
 
+  // 这样实现的好处是，无论fn是否发生变化，都可以保证在组件卸载时执行最新的fn函数。
   const fnRef = useLatest(fn);
 
-  useEffect(() => () => {
-    fnRef.current();
+  useEffect(() => {
+    return () => {
+      // 组件卸载时调用
+      fnRef.current();
+    }
   },[]);
 };
 
