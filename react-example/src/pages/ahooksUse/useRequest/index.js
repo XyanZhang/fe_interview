@@ -1,19 +1,48 @@
 import React, { useEffect } from 'react';
 
-export default function useFetch(service, otpions) {
+export default function useFetch(service, otpions, plugins) {
+  const { manual = false, ...rest } = options;
 
+  const fetchOptions = {
+    manual,
+    ...rest,
+  };
+  
   const serviceRef = useLatest(service); // 使用ref 进行绑定
 
   const update = useUpdate();
+
+  const fetchInstance = useCreation(() => {
+    const initState = plugins.map((p) => p.onInit.fetchOptions).filter(Boolean);
+
+    return new Fetch(
+      serviceRef,
+      fetchOptions,
+      update,
+      Object.assign({}, ...initState),
+    );
+  }, []);
+  fetchInstance.options = fetchOptions;
+  // run all plugins hooks
+  fetchInstance.pluginImpls = plugins.map((p) => p(fetchInstance, fetchOptions));
+
   
   let run = () => {}
 
   useMount(() => {
-
+    if (!manual) {
+      // useCachePlugin can set fetchInstance.state.params from cache when init
+      const params = fetchInstance.state.params || options.defaultParams || [];
+      
+      fetchInstance.run(...params);
+    }
   })
 
 
-  useUnmount(() => { console.log('组件卸载') })
+  useUnmount(() => { 
+    console.log('组件卸载')
+    fetchInstance.cancel();
+  })
 
   return {
     loading: '',
