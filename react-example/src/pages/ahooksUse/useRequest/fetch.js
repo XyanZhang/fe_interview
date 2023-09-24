@@ -121,4 +121,29 @@ export default class Fetch {
     
     }
   }
+
+  cancel() {
+    this.count += 1;
+    this.setState({
+      loading: false,
+    });
+
+    this.runPluginHandler('onCancel');
+  }
+
+  refresh() {
+    this.run(...(this.state.params || []));
+  }
+
+  refreshAsync() {
+    return this.runAsync(...(this.state.params || []));
+  }
+
+  mutate(data) {
+    const targetData = isFunction(data) ? data(this.state.data) : data;
+    this.runPluginHandler('onMutate', targetData);
+    this.setState({
+      data: targetData,
+    });
+  }
 } 
