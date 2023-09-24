@@ -1,5 +1,5 @@
 export default class Fetch {
-  
+  // 插件执行后返回的方法列表
   pluginImpls = [];
 
   count = 0;
@@ -30,7 +30,7 @@ export default class Fetch {
     };
     this.subscribe();
   }
-
+// run 是一个普通的同步函数，其内部也是调用了 runAsync 方法, 只不过进行了异常捕获
   run(...params) {
     // 调用runAsync
     this.runAsync(...params).catch(err => {
@@ -39,8 +39,9 @@ export default class Fetch {
       }
     })
   }
+  // 执行插件中的某个事件（event），rest 作为参数传入
   runPluginHandler(event, ...rest) {
-    const r = this.pluginImpls.map((i) => i[event]?.(...rest)).filter(Boolean);
+    const r = this.pluginImpls.map((i) => i[event](...rest)).filter(Boolean);
     return Object.assign({}, ...r);
   }
 
