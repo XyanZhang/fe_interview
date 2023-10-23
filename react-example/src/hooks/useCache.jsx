@@ -29,13 +29,13 @@ const useCache = (
   if (cacheMap.has(cacheKey)) {
       const current = cacheMap.get(cacheKey);
 
-      if (current && current?.expire !== -1 && current?.expire < Date.now()) {
+      if (current && current.expire !== -1 && current.expire < Date.now()) {
           // 缓存数据已过期
           cacheMap.delete(cacheKey);
           result = defaultData;
       } else {
           // 命中缓存
-          result = current?.data;
+          result = current.data;
       }
   } else {
       // 首次使用，返回默认值
