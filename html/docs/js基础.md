@@ -98,3 +98,37 @@ console.log(map.get(obj)); // 输出：数据
 ● 动态创建 DOM 方式： 动态创建 DOM 标签的方式，可以对文档的加载事件进行监听，当文档加载完成后再动态的创建 script 标签来引入 js 脚本。
 ● 使用 setTimeout 延迟方法： 设置一个定时器来延迟加载js脚本文件
 ● 让 JS 最后加载： 将 js 脚本放在文档的底部，来使 js 脚本尽可能的在最后来加载执行。
+
+## escape、encodeURI、encodeURIComponent 的区别
+
+● encodeURI 是对整个 URI 进行转义，将 URI 中的非法字符转换为合法字符，所以对于一些在 URI 中有特殊意义的字符不会进行转义。
+● encodeURIComponent 是对 URI 的组成部分进行转义，所以一些特殊字符也会得到转义。
+● escape 和 encodeURI 的作用相同，不过它们对于 unicode 编码为 0xff 之外字符的时候会有区别，escape 是直接在字符的 unicode 编码前加上 %u，而 encodeURI 首先会将字符转换为 UTF-8 的格式，再在每个字节前加上 %。
+
+
+## 什么是尾调用，使用尾调用有什么好处？
+
+尾调用指的是函数的最后一步调用另一个函数。代码执行是基于执行栈的，所以当在一个函数里调用另一个函数时，会保留当前的执行上下文，然后再新建另外一个执行上下文加入栈中。使用尾调用的话，因为已经是函数的最后一步，所以这时可以不必再保留当前的执行上下文，从而节省了内存，这就是尾调用优化。但是 ES6 的尾调用优化只在严格模式下开启，正常模式是无效的。
+
+```js
+function add(a, b, total = 0) {
+  if (a === 0) {
+    return total;
+  }
+  
+  // 尾调用
+  return add(a - 1, b, total + b);
+}
+console.log(add(5, 3)); // 输出：15
+
+
+// 非尾调用
+function add(a, b) {
+  const result = a + b;
+  console.log(result); // 非尾调用，在返回之前还有其他操作
+  
+  return result;
+}
+
+console.log(add(5, 3)); // 输出：8
+```
