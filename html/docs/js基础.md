@@ -5,7 +5,7 @@
 ```javascript
 function objectFactory() {
   let newObject = null;
-  let constructor = Array.prototype.shift.call(arguments);
+  let constructor = Array.prototype.shift.call(arguments); // arguments是类数组，不能直接使用shift
   let result = null;
   // 判断参数是否是一个函数
   if (typeof constructor !== "function") {
@@ -18,7 +18,7 @@ function objectFactory() {
   result = constructor.apply(newObject, arguments);
   // 判断返回对象
   let flag = result && (typeof result === "object" || typeof result === "function");
-  // 判断返回结果
+  // 判断返回结果，如果构造函数执行后返回的结果是对象或者函数，返回该结果，否则返回空对象
   return flag ? result : newObject;
 }
 // 使用方法
@@ -56,3 +56,35 @@ Map 对象是一种**有序的键值对集合**，可以根据键的顺序进行
 另外，Map 对象还提供了一些额外的功能，如可迭代的接口和对键的弱引用等，使其在某些场景下更加灵活和方便使用。
 
 综上所述，频繁添加和删除键值对时，使用 Map 对象可以获得更好的性能和更多的功能。
+
+## map 和 weakMap
+
++ weakMap 的键是弱引用的，只能是对象
+
+> WeakMap的设计目的在于，有时想在某个对象上面存放一些数据，但是这会形成对于这个对象的引用。一旦不再需要这两个对象，就必须手动删除这个引用，否则垃圾回收机制就不会释放对象占用的内存。
+
+```javascript
+// demo
+// 使用WeakMap
+const weakMap = new WeakMap();
+
+(function() {
+  const obj = {};
+  // 将对象作为键存储在WeakMap中
+  weakMap.set(obj, '数据');
+})();
+// 由于立即执行函数执行完毕后，obj没有其他的引用，所以垃圾回收机制会自动释放这个对象，同时也会自动清除WeakMap中对应的值。
+// 注意：这里无法通过weakMap获取到存储的数据
+
+// 使用Map
+const map = new Map();
+
+(function() {
+  const obj = {};
+  // 将对象作为键存储在Map中
+  map.set(obj, '数据');
+})();
+
+// 这里我们可以通过map获取到存储的数据
+console.log(map.get(obj)); // 输出：数据
+```
