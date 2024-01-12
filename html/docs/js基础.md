@@ -25,6 +25,24 @@ function objectFactory() {
 objectFactory(构造函数, 初始化参数); 
 ```
 
+## intanceof 操作符的实现原理及实现
+
+instanceof 运算符用于判断构造函数的 prototype 属性是否出现在对象的原型链中的任何位置
+
+```javascript
+function myInstanceOf(left, right) {
+  let proto = Object.getPrototypeOf(left); // 给定对象的原型链中的下一个对象
+  let prototype = right.prototype;
+
+  whilte(true) {
+    if(!proto) return false;
+    if(proto === prototype) return true; // 
+    
+    proto = Object.getPrototypeOf(proto);
+  }
+}
+```
+
 ## map 和 Object 的区别
 
 ### map
