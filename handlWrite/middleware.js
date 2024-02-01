@@ -55,11 +55,11 @@ async function middleware3(ctx, next) {
   console.log('Middleware 3 response')
 }
 
+use(middleware1);
+use(middleware2);
+use(middleware3);
 // 使用示例
 const composedMiddleware = compose(middleware);
-use(middleware1)
-use(middleware2)
-use(middleware3);
 
 composedMiddleware({}, () => {
   console.log('Final Handler');
