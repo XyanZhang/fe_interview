@@ -8,7 +8,7 @@ Function.prototype.MyCAll = function (context) {
         throw new TypeError('Error')
     }
     context = context || window
-    context.fn = this
+    context.fn = this;// 将 fn 执行的this指向context
     const args = [...arguments].slice(1)
     const result = context.fn(...args)
     delete context.fn
@@ -24,3 +24,5 @@ function bar(name, age) {
 }
 bar.MyCAll(foo, 'kevin', 18);
 bar.call(foo, 'kevin', 18);
+
+// 调用call的时候肯定前面有原函数，原函数.call call的this就指向了原函数，如果想讲原函数的this指向传入的对象，就需要使用 对象.函数 的方式，改变this指向
